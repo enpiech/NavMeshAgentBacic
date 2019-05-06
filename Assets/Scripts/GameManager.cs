@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour {
+
+	public static bool isGameOver = false;
+
     [SerializeField]
     private Transform[] _spawnerPositions;
     [SerializeField]
@@ -10,18 +13,23 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private Transform _target;
 
-
-    IEnumerator spawn()
+	IEnumerator spawn()
     {
-        yield return new WaitForSeconds(1f);
 
-        SpawnEnemy();
+		if (GameManager.isGameOver)
+			yield return null;
 
-        StartCoroutine("spawn");
+		yield return new WaitForSeconds(1f);
+
+		
+		SpawnEnemy();
+
+		StartCoroutine("spawn");		
     }
 
     // Use this for initialization
     void Start () {
+		isGameOver = false;
         StartCoroutine("spawn");
     }
 	

@@ -13,6 +13,9 @@ public class MoveController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GameManager.isGameOver)
+			return;
+
 		if (Input.GetKey(KeyCode.W))
 		{
 			_player.MoveForward();

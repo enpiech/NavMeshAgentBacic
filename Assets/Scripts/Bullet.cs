@@ -42,6 +42,12 @@ public class Bullet : MonoBehaviour {
 		if (tag == Constant.TAG_ENEMY && _parent.IsPlayer)
 		{
 			Enemy e = obj.GetComponent<Enemy>();
+			bool isDie = e.Hit(_parent.Damage);
+			if (isDie)
+			{
+				Player p = _parent.GetComponent<Player>();
+				p.IncreaseScore();
+			}
 			Destroy(gameObject);
 		}
 		else if (tag == Constant.TAG_PLAYER && _parent.IsEnemy)

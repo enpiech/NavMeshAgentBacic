@@ -98,8 +98,9 @@ public class Character : MonoBehaviour {
 		_transform.rotation = Quaternion.Euler(r);
 	}
 
-	public virtual void Hit(int damage)
+	public virtual bool Hit(int damage)
 	{
+		return false;
 	}
 
 	public virtual void Shot()
@@ -182,7 +183,7 @@ public class Character : MonoBehaviour {
 	{
 		get
 		{
-			return _health / _maxHealth;
+			return _health * 1.0f / _maxHealth;
 		}
 	}
 

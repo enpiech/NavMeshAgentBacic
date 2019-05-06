@@ -19,6 +19,14 @@ public class Enemy : Character {
 	
 	// Update is called once per frame
 	void Update () {
+		if (GameManager.isGameOver)
+		{
+			_navMeshAgent.velocity = Vector3.zero;
+			_navMeshAgent.isStopped = true;
+			return;
+		}
+			
+
 		_navMeshAgent.destination = _target.position;
 		Vector3 origin = transform.position;
         Vector3 destination = _target.position;
@@ -58,13 +66,15 @@ public class Enemy : Character {
 		}
 	}
 
-	public override void Hit(int damage)
+	public override bool Hit(int damage)
 	{
 		int health = this.DecreaseHealth(damage);
 		if (_health <= 0 && !IsDead)
 		{
 			Die();
+			return true;
 		}
+		return false;
 	}
 
 	public override void Die()

@@ -9,8 +9,15 @@ public class Player : Character {
 
 		CreateBullet();
 
+		SoundManager.instance.SoundFirePlay();
+
 		yield return new WaitForSecondsRealtime(1f);
 		CanFire = true;
+	}
+
+	protected override void StartCharacter()
+	{
+		UIManager.instance.UpdateHealthBar(HealthPercent);
 	}
 
 	public override void Shot()
@@ -23,20 +30,33 @@ public class Player : Character {
 		}
 	}
 
-	public override void Hit(int damage)
+	public override bool Hit(int damage)
 	{
 		int health = this.DecreaseHealth(damage);
+		UIManager.instance.UpdateHealthBar(HealthPercent);
+
 		if (_health <= 0 && !IsDead)
 		{
 			Die();
+			return true;
 		}
 
-		UIManager.instance.UpdateHealthBar(HealthPercent);
+		return false;
 	}
 
 	public override void Die()
 	{
 		IsDead = true;
+		DataManager.instance.Coin = this._coin;
 		UIManager.instance.ShowDialogDead();
+		GameManager.isGameOver = true;
+	}
+
+	private int _coin = 0;
+
+	public void IncreaseScore(int amount = 1)
+	{
+		_coin += amount;
+		UIManager.instance.UpdateScore(_coin);
 	}
 }
