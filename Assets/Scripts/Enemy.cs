@@ -10,7 +10,6 @@ public class Enemy : Character {
     [SerializeField]
     private float _distance = 1.5f;
 
-
 	// Use this for initialization
 	protected override void StartCharacter () {
         _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -26,12 +25,10 @@ public class Enemy : Character {
 			return;
 		}
 			
-
 		_navMeshAgent.destination = _target.position;
 		Vector3 origin = transform.position;
-        Vector3 destination = _target.position;
 
-        float distance = Vector3.Distance(origin, destination);
+        float distance = (origin - _navMeshAgent.destination).magnitude;
 
         if (distance <= _distance)
         {
@@ -69,7 +66,7 @@ public class Enemy : Character {
 	public override bool Hit(int damage)
 	{
 		int health = this.DecreaseHealth(damage);
-		if (_health <= 0 && !IsDead)
+		if (health <= 0 && !IsDead)
 		{
 			Die();
 			return true;

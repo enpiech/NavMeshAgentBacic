@@ -39,7 +39,7 @@ public class MoveController : MonoBehaviour {
 			_player.Jump();
 		}
 
-		if (Input.GetKeyDown(KeyCode.F))
+		if (Input.GetKey(KeyCode.F))
 		{
 			_player.Shot();
 		}

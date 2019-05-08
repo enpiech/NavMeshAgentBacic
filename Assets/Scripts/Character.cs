@@ -12,12 +12,17 @@ public class Character : MonoBehaviour {
 
 	[SerializeField] CharacterType _type;
 
-	[SerializeField] float _speed = 0;
-	[SerializeField] float _moveAngle;
+	[SerializeField]
+	private float _speed = 0;
+	[SerializeField]
+	private float _moveAngle;
 
-	[SerializeField]int _damage;
-	[SerializeField]protected int _health;
-	[SerializeField] int _jumpForce;
+	[SerializeField]
+	private int _damage;
+	[SerializeField]
+	protected int _health;
+	[SerializeField]
+	private int _jumpForce;
 
 	[SerializeField]
 	protected GameObject _bullet;
@@ -53,15 +58,7 @@ public class Character : MonoBehaviour {
 		StartCharacter();
 	}
 
-	protected virtual void StartCharacter()
-	{
-
-	}
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
+	protected virtual void StartCharacter() {	}
 
 	public void SetType(CharacterType value)
 	{
@@ -84,11 +81,9 @@ public class Character : MonoBehaviour {
 
 	public void RotateLeft()
 	{
-
 		Vector3 r = _transform.rotation.eulerAngles;
 		r.y -= Time.deltaTime * _moveAngle;
 		_transform.rotation = Quaternion.Euler(r);
-		//_transform.Rotate(new Vector3(0, 1, 0), -1 * _moveAngle * Time.deltaTime);
 	}
 
 	public void RotateRight()
@@ -210,6 +205,19 @@ public class Character : MonoBehaviour {
 		set
 		{
 			_isDead = value;
+		}
+	}
+
+	public float Speed
+	{
+		get
+		{
+			return _speed;
+		}
+
+		set
+		{
+			_speed = value;
 		}
 	}
 }

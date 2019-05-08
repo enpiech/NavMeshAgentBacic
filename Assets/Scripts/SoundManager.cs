@@ -6,6 +6,7 @@ public class SoundManager : MonoBehaviour {
 
 	public static SoundManager instance;
 
+	[SerializeField]
 	private AudioSource _audio;
 	[SerializeField]
 	private AudioClip[] _clips;
@@ -24,18 +25,7 @@ public class SoundManager : MonoBehaviour {
 		DontDestroyOnLoad(this.gameObject);
 	}
 
-	// Use this for initialization
-	void Start () {
-		_audio = GetComponent<AudioSource>();
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	public void SoundFirePlay()
+	public void PlayFireSound()
 	{
 		_audio.PlayOneShot(_clips[0]);
 	}

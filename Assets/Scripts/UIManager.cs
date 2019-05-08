@@ -10,10 +10,10 @@ public class UIManager : MonoBehaviour {
 	private GameObject _uiDead;
 
 	[SerializeField]
-	private Image _processHealthBar;
+	private Image _imgProcessHealthBar;
 
 	[SerializeField]
-	private Text _scoreText;
+	private Text _txtScore;
 
 	public static UIManager instance;
 
@@ -27,15 +27,10 @@ public class UIManager : MonoBehaviour {
 		instance = this;
 	}
 
-	// Use this for initialization
 	void Start () {
 		_uiDead.SetActive(false);
 
 		UpdateScore(DataManager.instance.Coin);
-	}
-	
-	// Update is called once per frame
-	void Update () {
 	}
 
 	public void Replay()
@@ -50,7 +45,12 @@ public class UIManager : MonoBehaviour {
 
 	public void UpdateHealthBar(float percent)
 	{
-		_processHealthBar.fillAmount = percent;
+		_imgProcessHealthBar.fillAmount = percent;
+	}
+
+	public void UpdateScore(int coin)
+	{
+		_txtScore.text = FormatCoinToString(coin);
 	}
 
 	string FormatCoinToString(int coin)
@@ -79,10 +79,5 @@ public class UIManager : MonoBehaviour {
 		}
 
 		return "";
-	}
-
-	public void UpdateScore(int coin)
-	{
-		_scoreText.text = FormatCoinToString(coin);
 	}
 }

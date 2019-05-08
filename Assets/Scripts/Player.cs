@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character {
+	bool _isRunning = false;
+
 	IEnumerator DelayForFire()
 	{
 		CanFire = false;
 
 		CreateBullet();
 
-		SoundManager.instance.SoundFirePlay();
+		SoundManager.instance.PlayFireSound();
 
 		yield return new WaitForSecondsRealtime(1f);
 		CanFire = true;
@@ -58,5 +60,15 @@ public class Player : Character {
 	{
 		_coin += amount;
 		UIManager.instance.UpdateScore(_coin);
+	}
+
+	void OnCollisionEnter(Collision collision)
+	{
+		string tag = collision.gameObject.tag;
+		if (tag == GameManager.INVISIBLE_WALL_TAG)
+		{
+			Die();
+			return;
+		}
 	}
 }

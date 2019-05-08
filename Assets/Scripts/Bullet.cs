@@ -33,10 +33,10 @@ public class Bullet : MonoBehaviour {
 		_direction = direction;
 	}
 
-	void OnCollisionEnter(Collision collision)
+	void OnTriggerEnter(Collider collider)
 	{
-		string tag = collision.gameObject.tag;
-		GameObject obj = collision.gameObject;
+		string tag = collider.gameObject.tag;
+		GameObject obj = collider.gameObject;
 		print(obj);
 
 		if (tag == Constant.TAG_ENEMY && _parent.IsPlayer)
