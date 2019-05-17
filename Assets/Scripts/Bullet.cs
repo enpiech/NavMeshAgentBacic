@@ -16,8 +16,6 @@ public class Bullet : MonoBehaviour {
 		_rigidbody = GetComponent<Rigidbody>();
 		_transform = transform;
 		_direction = transform.forward;
-
-		print(_parent);
 	}
 	
 	// Update is called once per frame

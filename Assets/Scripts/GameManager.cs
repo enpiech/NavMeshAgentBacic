@@ -17,15 +17,15 @@ public class GameManager : MonoBehaviour {
 	[SerializeField]
 	private uint _spawnDelayTime = 1;
 	[SerializeField]
-	private uint _maxEnemy = 200;
+	private uint _maxEnemy = 1;
 
 	private uint _countCurrentEnemy = 0;
 
     void Start () {
 		isGameOver = false;
 
-        StartCoroutine(spawn());
-    }
+		StartCoroutine(spawn());
+	}
 
 	IEnumerator spawn()
 	{

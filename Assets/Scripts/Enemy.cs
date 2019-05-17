@@ -8,12 +8,13 @@ public class Enemy : Character {
     [SerializeField]
     private Transform _target;
     [SerializeField]
-    private float _distance = 1.5f;
+    private float _attackDistance = 3f;
 
 	// Use this for initialization
 	protected override void StartCharacter () {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _navMeshAgent.destination = _target.position;
+		//_navMeshAgent.stoppingDistance = _attackDistance;
 	}
 	
 	// Update is called once per frame
@@ -24,15 +25,17 @@ public class Enemy : Character {
 			_navMeshAgent.isStopped = true;
 			return;
 		}
-			
-		_navMeshAgent.destination = _target.position;
+
 		Vector3 origin = transform.position;
+		Vector3 destination = _target.position;
 
-        float distance = (origin - _navMeshAgent.destination).magnitude;
+		_navMeshAgent.destination = _target.position;
 
-        if (distance <= _distance)
-        {
-            _navMeshAgent.velocity = Vector3.zero;
+		float distance = (origin - destination).magnitude;
+
+		if (distance <= _attackDistance)
+		{
+			_navMeshAgent.velocity = Vector3.zero;
 
 			Shot();
 		}

@@ -37,7 +37,7 @@ public class Player : Character {
 		int health = this.DecreaseHealth(damage);
 		UIManager.instance.UpdateHealthBar(HealthPercent);
 
-		if (_health <= 0 && !IsDead)
+		if (health <= 0 && !IsDead)
 		{
 			Die();
 			return true;
